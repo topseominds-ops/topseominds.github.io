@@ -9,12 +9,12 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- CSS VARIABLES (PROFESSIONAL DEEP BLUE THEME) --- */
+        /* --- CSS VARIABLES --- */
         :root {
-            --bg-primary: #0a192f; /* Deep Navy Blue */
-            --bg-secondary: #112240; /* Slightly Lighter Blue */
-            --bg-darker: #020c1b; /* Darkest Navy (Footer) */
-            --accent: #64ffda; /* Bright Teal/Cyan */
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-darker: #020c1b;
+            --accent: #64ffda;
             --text-bright: #e6f1ff;
             --text-muted: #8892b0;
             --whatsapp-green: #25D366;
@@ -50,7 +50,6 @@
         .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
         .section-padding { padding: var(--section-spacing) 0; }
         .text-center { text-align: center; }
-        .mb-20 { margin-bottom: 20px; }
         .mb-40 { margin-bottom: 40px; }
 
         .accent-header {
@@ -78,7 +77,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         .btn:hover { background: rgba(100, 255, 218, 0.1); transform: translateY(-3px); }
 
         .btn-fill {
@@ -109,33 +107,75 @@
         .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); text-transform: uppercase; letter-spacing: 0.5px; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* --- WHATSAPP FLOATING --- */
-        .whatsapp-float {
-            position: fixed; bottom: 30px; right: 30px;
-            background: var(--whatsapp-green); color: #fff;
-            width: 60px; height: 60px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            z-index: 999; transition: var(--transition);
+        /* --- HERO SLIDER --- */
+        #hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
         }
-        .whatsapp-float:hover { transform: translateY(-5px); }
 
-        /* --- HERO SECTION --- */
-        #hero {
-            position: relative; height: 100vh; display: flex; align-items: center;
-            background: var(--bg-primary); overflow: hidden;
+        .slider-wrapper {
+            display: flex;
+            width: 300%; /* 3 slides = 300% */
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
         }
-        .video-bg {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%; object-fit: cover; opacity: 0.4;
-            /* No hue-rotate this time, keeping natural colors but darkened */
-            filter: brightness(0.4); 
+
+        .slide {
+            width: 33.333%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
         }
+
+        /* Dark Overlay for slides */
+        .slide::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.85); /* Deep Blue Overlay */
+            z-index: 1;
+        }
+
         .hero-content {
-            position: relative; z-index: 2; max-width: 800px; margin-left: 10%;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding-left: 10%; /* Left alignment style */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.5s; /* Delay for text animation */
         }
-        h1.hero-title { font-size: 5rem; margin-bottom: 20px; }
+
+        /* Active slide text animation */
+        .slide.active .hero-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1.hero-title { font-size: 4.5rem; margin-bottom: 20px; line-height: 1.1; }
         h1.hero-title span { color: var(--accent); }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .dot {
+            width: 12px; height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active { background: var(--accent); transform: scale(1.2); }
 
         /* --- TRUST MARQUEE --- */
         #trust { background: var(--bg-secondary); padding: 30px 0; overflow: hidden; }
@@ -145,158 +185,72 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
         /* --- SPLIT SECTIONS --- */
-        .split-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-        }
-        .image-container {
-            position: relative; border-radius: 10px; overflow: hidden;
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
-        }
+        .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .image-container { position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5); }
         .image-container img { transition: var(--transition); filter: brightness(0.8); }
         .image-container:hover img { filter: brightness(1); transform: scale(1.02); }
-        .image-container::after {
-            content: ''; position: absolute; top: 20px; left: 20px;
-            width: 100%; height: 100%; border: 2px solid var(--accent);
-            z-index: -1; border-radius: 10px; transition: var(--transition);
-        }
+        .image-container::after { content: ''; position: absolute; top: 20px; left: 20px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: -1; border-radius: 10px; transition: var(--transition); }
         .image-container:hover::after { top: 10px; left: 10px; }
 
         /* --- SERVICES GRID --- */
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
-        .service-card {
-            background: var(--bg-secondary); padding: 40px 30px;
-            border-radius: 10px; transition: var(--transition);
-            border: 1px solid transparent;
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: var(--bg-secondary); padding: 40px 30px; border-radius: 10px; transition: var(--transition); border: 1px solid transparent; }
         .service-card:hover { transform: translateY(-10px); border-color: var(--accent); }
         .service-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 25px; }
 
-        /* --- TEAM & TESTIMONIALS --- */
-        #team {
-            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
-            position: relative;
-        }
-        .overlay-blue { position: absolute; top:0;left:0;width:100%;height:100%; background: rgba(10, 25, 47, 0.85); }
-
-        .testimonial-card {
-            background: var(--bg-secondary); padding: 40px; border-radius: 10px;
-            text-align: left; margin: 0 15px;
-        }
-        .client-profile { display: flex; align-items: center; gap: 15px; margin-top: 20px; }
-        .client-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
-
         /* --- PRICING --- */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-        
-        .price-card {
-            background: var(--bg-secondary); padding: 40px 25px; border-radius: 10px;
-            text-align: center; border: 1px solid transparent; transition: var(--transition);
-            position: relative;
-        }
-        
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .price-card { background: var(--bg-secondary); padding: 40px 25px; border-radius: 10px; text-align: center; border: 1px solid transparent; transition: var(--transition); position: relative; }
         .price-card:hover { transform: translateY(-10px); }
-
         .text-green { color: var(--price-basic); }
         .text-silver { color: var(--price-silver); }
         .text-gold { color: var(--price-gold); }
         .text-blue { color: var(--price-premium); }
-
-        .price-card.featured {
-            border: 2px solid var(--price-gold);
-            transform: scale(1.05);
-            z-index: 2;
-            background: #172a46;
-        }
-        
+        .price-card.featured { border: 2px solid var(--price-gold); transform: scale(1.05); z-index: 2; background: #172a46; }
         .price-card.featured:hover { transform: scale(1.05) translateY(-10px); }
-
         .plan-name { font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; font-weight: 400; color: #fff; }
         .price-amount { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 5px; }
         .price-crossed { text-decoration: line-through; color: var(--text-muted); font-size: 1.2rem; font-weight: 400; vertical-align: top; margin-left: 5px; }
         .price-period { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 600; letter-spacing: 1px; }
-
         .price-features { text-align: left; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
         .price-features li { margin-bottom: 12px; font-size: 0.9rem; color: #cbd5e1; display: flex; justify-content: space-between; }
         .price-features li span:first-child { font-weight: 500; }
-        
         .check { color: var(--whatsapp-green); font-weight: bold; }
         .cross { color: #ef5350; font-weight: bold; }
 
         /* --- FOOTER --- */
-        footer {
-            background: var(--bg-darker);
-            padding-top: 80px;
-            font-size: 0.95rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 50px;
-        }
-        .footer-col h4 {
-            color: var(--text-bright);
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
+        footer { background: var(--bg-darker); padding-top: 80px; font-size: 0.95rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; }
+        .footer-col h4 { color: var(--text-bright); margin-bottom: 25px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
         .footer-links li { margin-bottom: 12px; }
         .footer-links a { color: var(--text-muted); transition: 0.2s; font-size: 0.95rem; }
         .footer-links a:hover { color: var(--accent); padding-left: 5px; }
-
         .footer-logo { font-size: 1.8rem; font-weight: 800; color: #fff; display: block; margin-bottom: 15px; }
         .footer-logo span { color: var(--accent); }
-        .footer-desc { color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; font-size: 0.9rem; }
-        
-        .trust-badges { display: flex; gap: 15px; margin-top: 20px; }
-        .trust-badges img { height: 40px; opacity: 0.8; filter: grayscale(100%) invert(1); }
-
-        .social-icons a {
-            display: inline-flex; width: 40px; height: 40px;
-            background: var(--bg-secondary); color: var(--text-bright);
-            align-items: center; justify-content: center;
-            border-radius: 50%; margin-right: 10px; transition: 0.3s;
-        }
+        .social-icons a { display: inline-flex; width: 40px; height: 40px; background: var(--bg-secondary); color: var(--text-bright); align-items: center; justify-content: center; border-radius: 50%; margin-right: 10px; transition: 0.3s; }
         .social-icons a:hover { background: var(--accent); color: var(--bg-primary); transform: translateY(-3px); }
-
-        .contact-info li {
-            display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; color: var(--text-muted);
-        }
+        .contact-info li { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; color: var(--text-muted); }
         .contact-info i { color: var(--accent); margin-top: 5px; }
+        .footer-bottom { background: #000; padding: 25px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: #666; font-size: 0.85rem; }
 
-        .footer-bottom {
-            background: #000;
-            padding: 25px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-        }
+        /* --- TEAM & TESTIMONIALS --- */
+        #team { background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed; position: relative; }
+        .overlay-blue { position: absolute; top:0;left:0;width:100%;height:100%; background: rgba(10, 25, 47, 0.85); }
+        .testimonial-card { background: var(--bg-secondary); padding: 40px; border-radius: 10px; text-align: left; margin: 0 15px; }
+        .client-profile { display: flex; align-items: center; gap: 15px; margin-top: 20px; }
+        .client-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+
+        /* --- AUDIT --- */
+        #audit { background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed; }
+        .form-box input { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--bg-secondary); color: #fff; border-radius: 5px; }
+
+        /* --- WHATSAPP --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp-green); color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 999; transition: var(--transition); }
+        .whatsapp-float:hover { transform: translateY(-5px); }
 
         /* RESPONSIVE */
-        @media (max-width: 1024px) {
-             .nav-links { gap: 15px; }
-             .nav-links a { font-size: 0.8rem; }
-        }
-        @media (max-width: 900px) {
-            .split-section { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-            .hero-content { margin-left: 5%; }
-            h1.hero-title { font-size: 3.5rem; }
-            .nav-links { display: none; }
-            .pricing-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 1024px) { .nav-links { gap: 15px; } .nav-links a { font-size: 0.8rem; } }
+        @media (max-width: 900px) { .split-section { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 30px; } .hero-content { margin-left: 5%; padding-right: 5%; } h1.hero-title { font-size: 3rem; } .nav-links { display: none; } .pricing-grid { grid-template-columns: 1fr; } .slide { justify-content: center; text-align: center; } .hero-content { padding-left: 0; text-align: center; } }
     </style>
 </head>
 <body>
@@ -318,18 +272,49 @@
 
     <a href="https://wa.me/" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <section id="hero">
-        <video autoplay muted loop playsinline class="video-bg" poster="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80">
-            <source src="https://player.vimeo.com/external/371836287.sd.mp4?s=3467389a9f40837d9282363b7e77777727c97793&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
-        </video>
-        <div class="hero-content">
-            <span class="accent-header">Generating Revenue, Not Just Traffic.</span>
-            <h1 class="hero-title" data-aos="fade-up">Dominate Search. <br> <span>Engineer Growth.</span></h1>
-            <p class="mb-40" data-aos="fade-up" data-aos-delay="100" style="max-width: 600px;">We are a data-driven digital agency that combines technical SEO mastery with high-converting strategies to scale your business faster.</p>
-            <div data-aos="fade-up" data-aos-delay="200">
-                <a href="#audit" class="btn btn-fill">Get Free Proposal</a>
-                <a href="#services" class="btn" style="margin-left: 20px;">Explore Services</a>
+    <section id="hero-slider">
+        <div class="slider-wrapper">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-content">
+                    <span class="accent-header">Strategy First</span>
+                    <h1 class="hero-title">Dominate Search <br> <span>Rankings</span></h1>
+                    <p class="mb-40" style="max-width: 600px;">Data-driven SEO strategies that put your brand on page one. We don't just build traffic; we engineer authority.</p>
+                    <div>
+                        <a href="#audit" class="btn btn-fill">Get Free Proposal</a>
+                        <a href="#services" class="btn" style="margin-left: 20px;">Explore Services</a>
+                    </div>
+                </div>
             </div>
+            
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-content">
+                    <span class="accent-header">Analytics & Insights</span>
+                    <h1 class="hero-title">Data-Driven <br> <span>Revenue Growth</span></h1>
+                    <p class="mb-40" style="max-width: 600px;">Stop guessing. We use advanced analytics to identify high-converting opportunities that competitors miss.</p>
+                    <div>
+                        <a href="#audit" class="btn btn-fill">Start Scaling</a>
+                        <a href="#services" class="btn" style="margin-left: 20px;">Our Process</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-content">
+                    <span class="accent-header">Global Scale</span>
+                    <h1 class="hero-title">Expand Your Brand <br> <span>Globally</span></h1>
+                    <p class="mb-40" style="max-width: 600px;">From local dominance to global recognition. Our team of experts helps you scale across borders.</p>
+                    <div>
+                        <a href="#contact" class="btn btn-fill">Contact Us</a>
+                        <a href="#pricing" class="btn" style="margin-left: 20px;">View Plans</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </section>
 
@@ -561,16 +546,16 @@
         </div>
     </section>
 
-    <section id="audit" class="section-padding" style="background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed;">
+    <section id="audit" class="section-padding">
         <div class="container text-center" data-aos="zoom-in">
             <h2 class="section-title">Get Your Free 30-Page SEO Audit</h2>
             <p class="mb-40">Stop guessing what's holding your site back. Let our experts analyze your digital footprint.</p>
-            <form style="max-width: 600px; margin: 0 auto; background: rgba(17, 34, 64, 0.8); padding: 40px; border-radius: 10px; backdrop-filter: blur(10px);">
+            <form style="max-width: 600px; margin: 0 auto; background: rgba(17, 34, 64, 0.8); padding: 40px; border-radius: 10px; backdrop-filter: blur(10px);" class="form-box">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <input type="text" placeholder="Name *" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--bg-secondary); color: #fff; border-radius: 5px;">
-                     <input type="email" placeholder="Email *" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--bg-secondary); color: #fff; border-radius: 5px;">
+                    <input type="text" placeholder="Name *">
+                     <input type="email" placeholder="Email *">
                 </div>
-                 <input type="url" placeholder="Website URL *" style="width: 100%; padding: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--bg-secondary); color: #fff; border-radius: 5px;">
+                 <input type="url" placeholder="Website URL *" style="margin-bottom: 20px;">
                  <button class="btn btn-fill" style="width: 100%; border: none;">Send Me The Report</button>
             </form>
         </div>
@@ -656,6 +641,31 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 120 });
         
+        // --- HERO SLIDER LOGIC ---
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            // Remove active class from current
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            // Increment
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Apply transform
+            sliderWrapper.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+            
+            // Add active class to new
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // Slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
         // Sticky Nav Styling
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
@@ -665,7 +675,7 @@
                 nav.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
             } else {
                 nav.style.padding = '20px 40px';
-                nav.style.background = 'rgba(10, 25, 47, 0.85)';
+                nav.style.background = 'rgba(10, 25, 47, 0.95)';
                 nav.style.boxShadow = 'none';
             }
         });
