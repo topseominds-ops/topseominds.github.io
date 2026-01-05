@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopSEO Minds – Results Driven Digital Marketing Agency</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#050b1c;color:#eaf0ff;line-height:1.7}
+a{text-decoration:none;color:inherit}
+section{padding:80px 6%}
+h1,h2,h3{line-height:1.3}
+h2{font-size:38px;margin-bottom:20px}
+p{color:#c9d3ff}
+
+/* HEADER */
+header{position:fixed;top:0;width:100%;z-index:100;background:rgba(5,11,28,.9);backdrop-filter:blur(10px)}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 6%}
+.logo{font-size:22px;font-weight:800;color:#4cc3ff}
+.nav a{margin-left:25px;font-weight:500}
+
+/* HERO SLIDER */
+.hero{margin-top:90px;height:85vh;position:relative;overflow:hidden}
+.slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
+.slide.active{opacity:1}
+.hero-content{position:absolute;top:50%;left:6%;transform:translateY(-50%);max-width:650px}
+.hero h1{font-size:56px;margin-bottom:20px}
+.btn{display:inline-block;background:#ff7a7a;padding:14px 30px;border-radius:30px;color:#000;font-weight:700}
+
+/* TRUST LOGOS */
+.trust{background:#e8fbf3}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:30px;align-items:center}
+.trust img{max-height:50px;object-fit:contain;filter:grayscale(100%)}
+
+/* SERVICES */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.card{background:#0b1433;padding:30px;border-radius:18px}
+
+/* IMAGE ROW */
+.image-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.image-row img{width:100%;border-radius:20px}
+
+/* PRICING */
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
+.price{background:#fff;color:#000;padding:35px;border-radius:20px;text-align:center}
+.price h3{margin-bottom:10px}
+.price strong{font-size:36px}
+.price ul{text-align:left;margin:20px 0}
+.price li{margin-bottom:8px}
+.highlight{border:4px solid #ffb000}
+
+/* TESTIMONIALS */
+.testimonials{display:flex;gap:20px;overflow:hidden}
+.test{background:#0b1433;padding:25px;border-radius:15px;min-width:320px}
+
+/* FORM */
+.audit{background:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d') center/cover}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-top:30px}
+input{padding:14px;border-radius:10px;border:none}
+button{grid-column:1/-1;background:#ffb000;padding:16px;border:none;border-radius:30px;font-weight:700}
+
+/* FOOTER */
+footer{background:#050b1c}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
+.social img{width:26px;margin-right:10px}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">TopSEO Minds</div>
+    <div>
+      <a href="#">Home</a><a href="#">Services</a><a href="#">Pricing</a>
+      <a href="#">Blog</a><a href="#">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d')"></div>
+
+  <div class="hero-content">
+    <h1>Results-Driven Digital Marketing That Grows Your Business</h1>
+    <p>TopSEO Minds delivers SEO, PPC, CRO, website design, and content marketing strategies engineered for long-term growth, visibility, and ROI.</p>
+    <a class="btn">Get Free Consultation</a>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="trust-grid">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Hubstaff_logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Moz_logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Clutch_logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/SEMrush_Logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Woorank_logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Google_Partners_logo.svg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Bing_ads_logo.svg">
+    <img src="https://goodfirms.co/images/goodfirms-logo.png">
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section>
+<h2>Our Digital Marketing Services</h2>
+<p>We provide full-funnel digital marketing solutions designed to scale brands, increase conversions, and dominate competitive markets. Our strategies combine data, creativity, and automation.</p>
+
+<div class="cards">
+<div class="card"><h3>SEO Services</h3><p>Technical SEO, on-page optimization, content authority, and link building.</p></div>
+<div class="card"><h3>Local SEO</h3><p>Google Maps, GMB optimization, citations, and hyper-local growth.</p></div>
+<div class="card"><h3>E-commerce SEO</h3><p>Product and category optimization for revenue growth.</p></div>
+<div class="card"><h3>Website Design</h3><p>High-converting UX-focused website development.</p></div>
+<div class="card"><h3>Social Media Marketing</h3><p>Brand engagement across Meta, LinkedIn, and Instagram.</p></div>
+<div class="card"><h3>Digital Advertising</h3><p>ROI-driven Google Ads and paid media campaigns.</p></div>
+<div class="card"><h3>Content Marketing</h3><p>Authority content that ranks, converts, and builds trust.</p></div>
+<div class="card"><h3>CRO</h3><p>Conversion rate optimization through testing and analytics.</p></div>
+</div>
+</section>
+
+<!-- TEAM IMAGES -->
+<section>
+<div class="image-row">
+<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c">
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
+<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+</div>
+</section>
+
+<!-- WHY TRUST -->
+<section>
+<h2>Why Businesses Trust TopSEO Minds</h2>
+<p>We don’t believe in one-size-fits-all marketing. Every campaign is powered by research, analytics, and continuous optimization. Our team works as an extension of your business, aligning strategy with revenue goals.</p>
+</section>
+
+<!-- PRICING -->
+<section>
+<h2>SEO Pricing Plans</h2>
+<div class="pricing">
+<div class="price"><h3>Basic</h3><strong>$500</strong><ul><li>30 Keywords</li><li>40 Backlinks</li></ul><a class="btn">Start Today</a></div>
+<div class="price"><h3>Silver</h3><strong>$700</strong><ul><li>40 Keywords</li><li>60 Backlinks</li></ul><a class="btn">Start Today</a></div>
+<div class="price highlight"><h3>Gold</h3><strong>$1000</strong><ul><li>50 Keywords</li><li>100 Backlinks</li></ul><a class="btn">Start Today</a></div>
+<div class="price"><h3>Premium</h3><strong>$1800</strong><ul><li>100 Keywords</li><li>200 Backlinks</li></ul><a class="btn">Start Today</a></div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+<h2>What Our Clients Say</h2>
+<div class="testimonials">
+<div class="test">★★★★★ “Traffic doubled in 3 months.”</div>
+<div class="test">★★★★★ “Clear ROI & transparency.”</div>
+<div class="test">★★★★★ “True growth partner.”</div>
+<div class="test">★★★★★ “Professional and reliable.”</div>
+<div class="test">★★★★★ “Best SEO agency we hired.”</div>
+</div>
+</section>
+
+<!-- AUDIT -->
+<section class="audit">
+<h2>Get your free website audit today!</h2>
+<form class="form">
+<input placeholder="Name">
+<input placeholder="Email">
+<input placeholder="Phone">
+<input placeholder="Website">
+<button>Send me a proposal</button>
+</form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<section>
+<div class="footer-grid">
+<div>
+<h3>Get in Touch</h3>
+<p>30 N Gould St, Sheridan WY</p>
+<p>+1-307-209-3608</p>
+<p>info@topseominds.com</p>
+</div>
+<div>
+<h3>Services</h3>
+<p>SEO<br>Local SEO<br>PPC<br>Web Design<br>CRO</p>
+</div>
+<div>
+<h3>Useful Links</h3>
+<p>Home<br>Pricing<br>Blog<br>Contact</p>
+</div>
+<div>
+<h3>Service Areas</h3>
+<p>New York<br>Chicago<br>Dallas<br>Los Angeles</p>
+</div>
+</div>
+<p style="text-align:center;margin-top:40px">© 2019-2026 TopSEO Minds. All Rights Reserved.</p>
+</section>
+</footer>
+
+<script>
+let slides=document.querySelectorAll('.slide'),i=0;
+setInterval(()=>{slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active')},5000);
+</script>
+
+</body>
+</html>
