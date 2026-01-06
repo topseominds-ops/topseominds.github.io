@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Portfolio | TopSEO Minds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-card: #1d2d50;
+            --accent: #64ffda;
+            --text-bright: #e6f1ff;
+            --text-muted: #8892b0;
+            --border: rgba(255,255,255,0.05);
+            --transition: all 0.3s ease;
+            --section-spacing: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-bright);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; border-radius: 8px; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: var(--section-spacing) 0; }
+        .text-center { text-align: center; }
+
+        .accent-header {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-fill {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-fill:hover { background: #4cccba; transform: translateY(-3px); }
+
+        .btn-outline {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: transparent;
+        }
+        .btn-outline:hover { background: rgba(100, 255, 218, 0.1); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > li { position: relative; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            min-width: 220px;
+            padding: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-links > li:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-transform: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .dropdown-menu li a:hover { background: rgba(255,255,255,0.05); padding-left: 25px; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80') center/cover;
+            text-align: center;
+        }
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .breadcrumb { font-size: 0.9rem; color: var(--text-muted); }
+        .breadcrumb span { color: var(--accent); }
+
+        /* --- PORTFOLIO FILTER --- */
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+        }
+
+        /* --- PORTFOLIO GRID --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .port-img {
+            height: 220px;
+            background: #152033;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .port-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .portfolio-item:hover .port-img img { transform: scale(1.1); }
+
+        .port-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .port-cat {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .port-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .port-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-tag {
+            font-size: 0.75rem;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .seo-results {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 2px solid var(--accent);
+        }
+        .seo-stat {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        .seo-stat:last-child { margin-bottom: 0; }
+        .seo-stat span:first-child { color: var(--text-muted); }
+
+        .port-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        /* --- MODAL --- */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.active { display: flex; animation: fadeIn 0.3s; }
+        
+        .modal-content {
+            background: var(--bg-secondary);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid var(--accent);
+            position: relative;
+        }
+        
+        .modal-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #152033;
+        }
+        
+        .modal-body { padding: 40px; }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- FOOTER --- */
+        footer { background: var(--bg-darker); padding: 80px 0 30px; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1.1rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .footer-links a { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+        .contact-info li { display: flex; gap: 10px; margin-bottom: 15px; color: var(--text-muted); font-size: 0.9rem; }
+        .contact-info i { color: var(--accent); margin-top: 5px; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">TopSEO <span>Minds</span>.</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation Management</a></li>
+                        <li><a href="advertising.html">Advertising (PPC)</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="market.html">Market</a></li>
+                <li>
+                    <a href="#">Pricing <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo-packages.html">SEO Packages</a></li>
+                        <li><a href="smo-packages.html">SMO Packages</a></li>
+                        <li><a href="ppc-packages.html">PPC Packages</a></li>
+                        <li><a href="orm-packages.html">ORM Packages</a></li>
+                        <li><a href="website-packages.html">Website Packages</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html" style="color:var(--accent)">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pay-now.html" class="btn-fill">PAY NOW</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-up">Our Portfolio</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Showcasing Our Digital Craftsmanship & Results.</p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html">Home</a> / <span>Portfolio</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            
+            <div class="portfolio-filter" data-aos="fade-up">
+                <button class="filter-btn active" onclick="filterSelection('all')">All Work</button>
+                <button class="filter-btn" onclick="filterSelection('web')">Web Development</button>
+                <button class="filter-btn" onclick="filterSelection('seo')">SEO & Marketing</button>
+            </div>
+
+            <div class="portfolio-grid">
+                
+                <div class="portfolio-item filter-item web" data-aos="fade-up">
+                    <div class="port-img">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80" alt="Truck Solution">
+                    </div>
+                    <div class="port-content">
+                        <span class="port-cat">Web Development</span>
+                        <h3 class="port-title">Elevated Truck Solutions</h3>
+                        <p class="port-desc">Provides affordable commercial truck rentals and sales. We built a robust inventory management system to help them deliver reliable vehicles.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="port-footer">
+                            <button class="btn-outline" onclick="openModal('web1')">View Project</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item filter-item seo" data-aos="fade-up">
+                    <div class="port-img">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80" alt="Twist It Sistah">
+                    </div>
+                    <div class="port-content">
+                        <span class="port-cat">SEO & Strategy</span>
+                        <h3 class="port-title">Twist It Sistah</h3>
+                        <p class="port-desc">A lifestyle e-commerce brand. We implemented a technical SEO audit and content strategy to boost organic traffic significantly.</p>
+                        <div class="seo-results">
+                            <div class="seo-stat"><span>Traffic Growth:</span> <strong>+240%</strong></div>
+                            <div class="seo-stat"><span>Keywords Ranked:</span> <strong>150+ Top 10</strong></div>
+                        </div>
+                        <div class="port-footer">
+                            <button class="btn-outline" onclick="openModal('seo1')">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item filter-item web" data-aos="fade-up">
+                    <div class="port-img">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80" alt="Harvest Child">
+                    </div>
+                    <div class="port-content">
+                        <span class="port-cat">Web Design</span>
+                        <h3 class="port-title">Harvest Child Development</h3>
+                        <p class="port-desc">Created a secure, warm, and inviting platform for childcare programs, allowing parents to connect and enroll online.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JS</span>
+                        </div>
+                        <div class="port-footer">
+                            <button class="btn-outline" onclick="openModal('web2')">View Project</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item filter-item seo" data-aos="fade-up">
+                    <div class="port-img">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80" alt="ACE COPY">
+                    </div>
+                    <div class="port-content">
+                        <span class="port-cat">Local SEO</span>
+                        <h3 class="port-title">ACE COPY INC</h3>
+                        <p class="port-desc">A B2B printing service needing local leads. We optimized their Google Business Profile and built local authority.</p>
+                        <div class="seo-results">
+                            <div class="seo-stat"><span>Local Calls:</span> <strong>+85% MoM</strong></div>
+                            <div class="seo-stat"><span>Map Ranking:</span> <strong>#1 in 3 Cities</strong></div>
+                        </div>
+                        <div class="port-footer">
+                            <button class="btn-outline" onclick="openModal('seo2')">View Case Study</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item filter-item web" data-aos="fade-up">
+                    <div class="port-img">
+                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80" alt="Premier Sport Cars">
+                    </div>
+                    <div class="port-content">
+                        <span class="port-cat">Web Development</span>
+                        <h3 class="port-title">Premier Sport Cars</h3>
+                        <p class="port-desc">A luxury vehicle booking engine for Marbella, featuring high-resolution galleries and transparent reservation pricing.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">Booking API</span>
+                        </div>
+                        <div class="port-footer">
+                            <button class="btn-outline" onclick="openModal('web3')">View Project</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item filter-item web" data-aos="fade-up">
+                    <div class="port-img">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80" alt="Real Estate">
+                    </div>
+                    <div class="port-content">
+                        <span class="port-cat">Real Estate Web</span>
+                        <h3 class="port-title">Urban Nest Real Estate</h3>
+                        <p class="port-desc">A premium real estate platform with integrated MLS/IDX search, agent profiles, and automated lead capture.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">WordPress</span>
+                            <span class="tech-tag">IDX/MLS</span>
+                            <span class="tech-tag">CRM</span>
+                        </div>
+                        <div class="port-footer">
+                            <button class="btn-outline" onclick="openModal('web6')">View Project</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle" style="color:#fff; margin:0;">Project Title</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImg" src="" alt="Project" class="modal-img">
+                <div id="modalDesc"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>TopSEO Minds</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="blog.html">Our Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation</a></li>
+                        <li><a href="advertising.html">Advertising</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>30 N. Gould St, Sheridan, WY</span></li>
+                        <li><i class="fas fa-phone-alt"></i> <span>+1-307-209-3608</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>info@topseominds.com</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="#" style="color: #fff;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #fff;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #fff;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("filter-item");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+                if (x[i].className.indexOf(c) > -1) x[i].style.display = "flex";
+            }
+            var btns = document.getElementsByClassName("filter-btn");
+            for (i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            event.currentTarget.classList.add("active");
+        }
+
+        const projectData = {
+            'web1': {
+                title: "Elevated Truck Solutions",
+                img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80",
+                html: "<p>Elevated Truck Solutions provides commercial vehicle rentals. We delivered a fully responsive inventory system.</p>"
+            },
+            'seo1': {
+                title: "Case Study: Twist It Sistah",
+                img: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80",
+                html: "<h4>Results</h4><ul><li>+240% organic traffic.</li><li>150+ keywords in Top 10.</li></ul>"
+            }
+        };
+
+        function openModal(id) {
+            const data = projectData[id];
+            if(!data) return;
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalImg').src = data.img;
+            document.getElementById('modalDesc').innerHTML = data.html;
+            document.getElementById('projectModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

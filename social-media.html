@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Marketing | TopSEO Minds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- COPY THEME VARIABLES FROM INDEX.HTML --- */
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-darker: #020c1b;
+            --accent: #64ffda;
+            --text-bright: #e6f1ff;
+            --text-muted: #8892b0;
+            --whatsapp-green: #25D366;
+            --transition: all 0.3s ease;
+            --section-spacing: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-bright);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; border-radius: 8px; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: var(--section-spacing) 0; }
+        
+        h1, h2, h3, h4 { font-weight: 700; color: var(--text-bright); line-height: 1.2; }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; margin-top: 40px; }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; }
+
+        .accent-header {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-fill {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+        .btn-fill:hover { background: #4cccba; transform: translateY(-3px); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > li { position: relative; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            min-width: 220px;
+            padding: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-links > li:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-transform: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .dropdown-menu li a:hover { background: rgba(255,255,255,0.05); padding-left: 25px; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url('https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&q=80') center/cover;
+            text-align: center;
+        }
+        .breadcrumb { margin-top: 20px; font-size: 0.9rem; color: var(--text-muted); }
+        .breadcrumb span { color: var(--accent); }
+
+        /* --- CONTENT GRID --- */
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+        
+        /* Service Cards Grid */
+        .smm-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .smm-card {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .smm-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .smm-card h4 { font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+        .smm-card p { font-size: 0.9rem; margin-bottom: 0; }
+        .smm-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; }
+
+        /* Platform Icons */
+        .platform-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0 40px;
+        }
+        .platform-item {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .platform-item i { color: var(--accent); }
+
+        /* Sidebar Form */
+        .sidebar-form-container {
+            position: sticky; top: 100px;
+            background: #fff; border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .form-header {
+            background: #5c6b7f; padding: 30px 20px 60px 20px;
+            text-align: center; position: relative; z-index: 1;
+        }
+        .form-header h3 { color: #fff; font-size: 1.4rem; text-transform: uppercase; margin: 0; font-weight: 300; }
+        .form-header h3 strong { font-weight: 700; }
+        .form-header::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; background: #fff;
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        }
+        .form-body { padding: 20px 30px 40px 30px; background: #fff; }
+        .sidebar-input {
+            width: 100%; padding: 12px 15px; margin-bottom: 15px;
+            border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; color: #333; background: #fff;
+        }
+        .sidebar-btn {
+            width: 100%; padding: 15px; background: #429aff; color: #fff;
+            border: none; border-radius: 4px; font-weight: 700;
+            text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        .sidebar-btn:hover { background: #2176d2; }
+
+        /* Process Steps */
+        .process-list { list-style: none; margin: 40px 0; }
+        .process-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 30px;
+        }
+        .process-item::before {
+            content: '\f00c'; /* Check icon */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0; top: 0;
+            width: 35px; height: 35px;
+            background: var(--bg-secondary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-size: 0.9rem;
+        }
+        .process-item h4 { color: #fff; margin-bottom: 5px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--bg-darker); padding: 80px 0 30px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1.1rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .footer-links a { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+        .contact-info li { display: flex; gap: 10px; margin-bottom: 15px; color: var(--text-muted); font-size: 0.9rem; }
+        .contact-info i { color: var(--accent); margin-top: 5px; }
+
+        @media (max-width: 900px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .sidebar-form { position: relative; top: 0; margin-top: 50px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">TopSEO <span>Minds</span>.</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#" style="color:var(--accent)">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html" style="color:var(--accent)">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation Management</a></li>
+                        <li><a href="advertising.html">Advertising (PPC)</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="market.html">Market</a></li>
+                <li>
+                    <a href="#">Pricing <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo-packages.html">SEO Packages</a></li>
+                        <li><a href="smo-packages.html">SMO Packages</a></li>
+                        <li><a href="ppc-packages.html">PPC Packages</a></li>
+                        <li><a href="orm-packages.html">ORM Packages</a></li>
+                        <li><a href="website-packages.html">Website Packages</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pay-now.html" class="btn-fill">PAY NOW</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <a href="https://wa.me/" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <header class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-up">Social Media Marketing</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Turbocharge Your Brand's Rise: Turn Engagement into Revenue.</p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html">Home</a> / <span>Social Media</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container content-grid">
+            
+            <div class="service-detail">
+                <span class="accent-header">Boost Engagement</span>
+                <h2>Results-Driven Social Media Strategies</h2>
+                <p>Social media isn't just about likes—it's about building real connections, boosting brand awareness, and driving business growth. With the right strategy, SMM helps you engage, convert, and dominate platforms like Facebook, Instagram, LinkedIn, and X.</p>
+                
+                <img src="https://images.unsplash.com/photo-1531297461136-82lw9b44d943?auto=format&fit=crop&q=80&w=1200" alt="Social Media Growth Dashboard" style="margin: 30px 0; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+
+                <div class="smm-services">
+                    <div class="smm-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h4>Cost-Efficient Promotion</h4>
+                        <p>Reach thousands of potential customers with targeted organic reach and paid ads that don't break the bank.</p>
+                    </div>
+                    <div class="smm-card">
+                        <i class="fas fa-globe"></i>
+                        <h4>Multi-Platform Reach</h4>
+                        <p>Expand your audience across Facebook, Instagram, YouTube, and LinkedIn with tailored content.</p>
+                    </div>
+                </div>
+
+                <h3>Our Expert SMM Services</h3>
+                <ul class="process-list">
+                    <li class="process-item">
+                        <h4>Social Media Management</h4>
+                        <p>We handle the heavy lifting: creating high-quality posts, scheduling, and monitoring engagement.</p>
+                    </li>
+                    <li class="process-item">
+                        <h4>Social Media Advertising</h4>
+                        <p>Turn views into clicks with expert Facebook & LinkedIn ad campaigns designed for maximum ROI.</p>
+                    </li>
+                </ul>
+
+                <h3>Platforms We Cover</h3>
+                <div class="platform-grid">
+                    <div class="platform-item"><i class="fab fa-facebook-f"></i> Facebook</div>
+                    <div class="platform-item"><i class="fab fa-instagram"></i> Instagram</div>
+                    <div class="platform-item"><i class="fab fa-linkedin-in"></i> LinkedIn</div>
+                    <div class="platform-item"><i class="fab fa-twitter"></i> X (Twitter)</div>
+                    <div class="platform-item"><i class="fab fa-youtube"></i> YouTube</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="sidebar-form-container" id="audit">
+                    <div class="form-header">
+                        <h3>START NOW <strong>PAY NOW</strong></h3>
+                    </div>
+                    <div class="form-body">
+                        <form action="pay-now.html">
+                            <input type="text" class="sidebar-input" placeholder="Name (*)" required>
+                            <input type="email" class="sidebar-input" placeholder="Email Address (*)" required>
+                            <input type="url" class="sidebar-input" placeholder="Website or Social Handle">
+                            <textarea class="sidebar-input" rows="4" placeholder="Tell us about your campaign goals..."></textarea>
+                            <button class="sidebar-btn" type="submit">PAY NOW</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>TopSEO Minds</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone-alt"></i> <span>+1-307-209-3608</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>info@topseominds.com</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | TopSEO Minds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-card: #1d2d50;
+            --accent: #64ffda;
+            --text-bright: #e6f1ff;
+            --text-muted: #8892b0;
+            --border: rgba(255,255,255,0.05);
+            --transition: all 0.3s ease;
+            --section-spacing: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-bright);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; border-radius: 8px; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: var(--section-spacing) 0; }
+        .text-center { text-align: center; }
+        .mb-20 { margin-bottom: 20px; }
+        .mb-40 { margin-bottom: 40px; }
+
+        .accent-header {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-fill {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 14px 30px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            width: 100%; /* Full width for form button */
+        }
+        .btn-fill:hover { background: #4cccba; transform: translateY(-3px); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > li { position: relative; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Dropdown */
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; background: var(--bg-secondary);
+            min-width: 220px; padding: 15px 0; border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; visibility: hidden;
+            transform: translateY(10px); transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-links > li:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li a { display: block; padding: 10px 20px; text-transform: none; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .dropdown-menu li a:hover { background: rgba(255,255,255,0.05); padding-left: 25px; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1423666639041-f142fcb93315?auto=format&fit=crop&q=80') center/cover;
+            text-align: center;
+        }
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .breadcrumb { font-size: 0.9rem; color: var(--text-muted); }
+        .breadcrumb span { color: var(--accent); }
+
+        /* --- CONTACT SECTION --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Left Side: Info */
+        .contact-info-box h2 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .contact-info-box p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .info-icon {
+            width: 50px; height: 50px;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .info-text h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .info-text p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* Right Side: Form */
+        .contact-form {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .form-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.08);
+        }
+        textarea.form-control { resize: none; height: 120px; }
+
+        /* Map Section */
+        .map-section {
+            width: 100%;
+            height: 450px;
+            margin-top: 0;
+            filter: grayscale(100%) invert(92%) contrast(83%); /* Dark Mode Map Effect */
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- FOOTER --- */
+        footer { background: var(--bg-darker); padding: 80px 0 30px; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1.1rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .footer-links a { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+        .contact-info li { display: flex; gap: 10px; margin-bottom: 15px; color: var(--text-muted); font-size: 0.9rem; }
+        .contact-info i { color: var(--accent); margin-top: 5px; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">TopSEO <span>Minds</span>.</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation Management</a></li>
+                        <li><a href="advertising.html">Advertising (PPC)</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="market.html">Market</a></li>
+                <li>
+                    <a href="#">Pricing <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo-packages.html">SEO Packages</a></li>
+                        <li><a href="smo-packages.html">SMO Packages</a></li>
+                        <li><a href="ppc-packages.html">PPC Packages</a></li>
+                        <li><a href="orm-packages.html">ORM Packages</a></li>
+                        <li><a href="website-packages.html">Website Packages</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" style="color:var(--accent)">Contact</a></li>
+                <li><a href="pay-now.html" class="btn-fill" style="width: auto;">PAY NOW</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-up">Contact Us</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Let's Discuss Your Project and Growth Strategy.</p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html">Home</a> / <span>Contact</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container contact-grid">
+            
+            <div class="contact-info-box" data-aos="fade-right">
+                <span class="accent-header">Get In Touch</span>
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Contact us today to get connected with one of our SEO experts. On your introductory call, we'll perform a live audit of your site and examine what barriers are harming your growth.</p>
+                
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text">
+                        <h4>Office Address</h4>
+                        <p>30 N. Gould St, Suite 6573<br>Sheridan, WY 82801, USA</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text">
+                        <h4>Phone Number</h4>
+                        <p>+1-307-209-3608</p>
+                        <p style="font-size:0.85rem; color:var(--accent);">Mon - Fri, 9am - 6pm</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <h4>Email Us</h4>
+                        <p>info@topseominds.com</p>
+                        <p style="font-size:0.85rem; color:var(--accent);">24/7 Online Support</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form" data-aos="fade-left">
+                <h3 class="form-title">Send a Message</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name *" required>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Address *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Phone Number *" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="url" class="form-control" placeholder="Website URL (Optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <select class="form-control" style="color: #9ca3af;">
+                            <option>Interested Service?</option>
+                            <option>SEO Services</option>
+                            <option>PPC / Advertising</option>
+                            <option>Web Design</option>
+                            <option>Reputation Management</option>
+                            <option>Mobile App Development</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Tell us about your project..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-fill" style="width: 100%;">Submit Request</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.9560377045763!2d-106.9584742!3d44.8010414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5335fabc5b69123d%3A0x673a5a41416e917d!2s30%20N%20Gould%20St%20%236573%2C%20Sheridan%2C%20WY%2082801%2C%20USA!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>TopSEO Minds</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="blog.html">Our Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation</a></li>
+                        <li><a href="advertising.html">Advertising</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>30 N. Gould St, Sheridan, WY</span></li>
+                        <li><i class="fas fa-phone-alt"></i> <span>+1-307-209-3608</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>info@topseominds.com</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="#" style="color: #fff;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #fff;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #fff;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

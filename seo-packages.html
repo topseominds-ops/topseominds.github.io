@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Packages | TopSEO Minds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- COPY THEME VARIABLES FROM INDEX.HTML --- */
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-darker: #020c1b;
+            --accent: #64ffda;
+            --text-bright: #e6f1ff;
+            --text-muted: #8892b0;
+            --whatsapp-green: #25D366;
+            --transition: all 0.3s ease;
+            --section-spacing: 100px;
+            
+            /* Pricing Colors */
+            --price-basic: #4caf50;
+            --price-silver: #9e9e9e;
+            --price-gold: #ff9800;
+            --price-premium: #448aff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-bright);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; border-radius: 8px; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: var(--section-spacing) 0; }
+        .text-center { text-align: center; }
+        .mb-20 { margin-bottom: 20px; }
+        .mb-40 { margin-bottom: 40px; }
+        .mb-60 { margin-bottom: 60px; }
+        
+        h1, h2, h3, h4 { font-weight: 700; color: var(--text-bright); line-height: 1.2; }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; }
+
+        .accent-header {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-fill {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 14px 30px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        .btn-fill:hover { background: #4cccba; transform: translateY(-3px); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > li { position: relative; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            min-width: 220px;
+            padding: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-links > li:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-transform: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .dropdown-menu li a:hover { background: rgba(255,255,255,0.05); padding-left: 25px; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80') center/cover;
+            text-align: center;
+        }
+        .breadcrumb { margin-top: 20px; font-size: 0.9rem; color: var(--text-muted); }
+        .breadcrumb span { color: var(--accent); }
+
+        /* --- PRICING CARDS --- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 80px; }
+        .price-card { background: var(--bg-secondary); padding: 40px 30px; border-radius: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.05); position: relative; transition: var(--transition); }
+        .price-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .price-card.featured { border: 2px solid var(--price-gold); transform: scale(1.05); z-index: 2; background: #152033; }
+        
+        .plan-title { font-size: 1.4rem; margin-bottom: 15px; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+        .plan-price { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 5px; }
+        .plan-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 25px; display: block; }
+        
+        .plan-features { text-align: left; margin: 25px 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .plan-features li { margin-bottom: 12px; display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--text-bright); }
+        .plan-features li span:last-child { font-weight: 700; }
+
+        .text-green { color: var(--price-basic); }
+        .text-silver { color: var(--price-silver); }
+        .text-gold { color: var(--price-gold); }
+        .text-blue { color: var(--price-premium); }
+        .check { color: var(--whatsapp-green); font-weight: bold; font-family: sans-serif; }
+        .cross { color: #ef4444; font-weight: bold; font-family: sans-serif; }
+
+        /* --- SEGMENTED BREAKDOWN TABLES --- */
+        .feature-block {
+            margin-bottom: 50px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .feature-header {
+            background: #152c4a;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .feature-header i {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .feature-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .table-responsive { overflow-x: auto; }
+        .comp-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .comp-table th {
+            text-align: center;
+            padding: 15px;
+            background: rgba(10, 25, 47, 0.5);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .comp-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            color: var(--text-bright);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .comp-table td:first-child { text-align: left; font-weight: 500; width: 35%; color: #fff; }
+        .comp-table tr:hover { background: rgba(255,255,255,0.02); }
+
+        .col-basic { color: var(--price-basic); font-weight: 700; }
+        .col-silver { color: var(--price-silver); font-weight: 700; }
+        .col-gold { color: var(--price-gold); font-weight: 700; }
+        .col-prem { color: var(--price-premium); font-weight: 700; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--bg-darker); padding: 80px 0 30px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1.1rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .footer-links a { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">TopSEO <span>Minds</span>.</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation Management</a></li>
+                        <li><a href="advertising.html">Advertising (PPC)</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="market.html">Market</a></li>
+                <li>
+                    <a href="#" style="color:var(--accent)">Pricing <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo-packages.html" style="color:var(--accent)">SEO Packages</a></li>
+                        <li><a href="smo-packages.html">SMO Packages</a></li>
+                        <li><a href="ppc-packages.html">PPC Packages</a></li>
+                        <li><a href="orm-packages.html">ORM Packages</a></li>
+                        <li><a href="website-packages.html">Website Packages</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pay-now.html" class="btn-fill" style="width: auto;">PAY NOW</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-up">SEO Packages</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Transparent Pricing. Measurable Results. No Hidden Fees.</p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html">Home</a> / <a href="#">Pricing</a> / <span>SEO Packages</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h4 class="plan-title text-green">BASIC</h4>
+                    <div class="plan-price text-green">$500</div>
+                    <span class="plan-sub">/ MONTH</span>
+                    <ul class="plan-features">
+                        <li>Keywords <span>30</span></li>
+                        <li>Backlinks <span>40</span></li>
+                        <li>Pages Optimized <span>10</span></li>
+                        <li>GBP (GMB) <span class="cross">✘</span></li>
+                        <li>Geotagging <span class="cross">✘</span></li>
+                        <li>G.E.O / A.E.O <span class="cross">✘</span></li>
+                    </ul>
+                    <a href="pay-now.html" class="btn-fill" style="width:100%; margin-top:20px;">PAY NOW</a>
+                </div>
+
+                <div class="price-card">
+                    <h4 class="plan-title text-silver">SILVER</h4>
+                    <div class="plan-price text-silver">$700</div>
+                    <span class="plan-sub">/ MONTH</span>
+                    <ul class="plan-features">
+                        <li>Keywords <span>40</span></li>
+                        <li>Backlinks <span>60</span></li>
+                        <li>Pages Optimized <span>15</span></li>
+                        <li>GBP (GMB) <span class="check">✔</span></li>
+                        <li>Geotagging <span class="cross">✘</span></li>
+                        <li>G.E.O / A.E.O <span class="cross">✘</span></li>
+                    </ul>
+                    <a href="pay-now.html" class="btn-fill" style="width:100%; margin-top:20px;">PAY NOW</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div style="position:absolute; top:-10px; right:-10px; background:red; color:#fff; padding:5px 10px; border-radius:50px; font-size:0.7rem; font-weight:bold;">BEST SELLER</div>
+                    <h4 class="plan-title text-gold">GOLD</h4>
+                    <div class="plan-price text-gold">$1000</div>
+                    <span class="plan-sub">/ MONTH</span>
+                    <ul class="plan-features">
+                        <li>Keywords <span>50</span></li>
+                        <li>Backlinks <span>100</span></li>
+                        <li>Pages Optimized <span>25</span></li>
+                        <li>GBP (GMB) <span class="check">✔</span></li>
+                        <li>Geotagging <span class="check">✔</span></li>
+                        <li>G.E.O / A.E.O <span class="cross">✘</span></li>
+                    </ul>
+                    <a href="pay-now.html" class="btn-fill" style="width:100%; margin-top:20px; background:var(--price-gold); border-color:var(--price-gold);">PAY NOW</a>
+                </div>
+
+                <div class="price-card">
+                    <h4 class="plan-title text-blue">PREMIUM</h4>
+                    <div class="plan-price text-blue">$1800</div>
+                    <span class="plan-sub">/ MONTH</span>
+                    <ul class="plan-features">
+                        <li>Keywords <span>100</span></li>
+                        <li>Backlinks <span>200</span></li>
+                        <li>Pages Optimized <span>40</span></li>
+                        <li>GBP (GMB) <span class="check">✔</span></li>
+                        <li>Geotagging <span class="check">✔</span></li>
+                        <li>G.E.O / A.E.O <span class="check">✔</span></li>
+                    </ul>
+                    <a href="pay-now.html" class="btn-fill" style="width:100%; margin-top:20px;">PAY NOW</a>
+                </div>
+            </div>
+
+            <div class="text-center mb-40">
+                <span class="accent-header">Step 1</span>
+                <h2>🔍 First-Hand SEO Analysis</h2>
+            </div>
+            <div class="feature-block">
+                <div class="table-responsive">
+                    <table class="comp-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th class="col-basic">Basic</th>
+                                <th class="col-silver">Silver</th>
+                                <th class="col-gold">Gold</th>
+                                <th class="col-prem">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Pre-Optimization Website Audit</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Competitor Analysis</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Keyword Research & Analysis</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Duplicate Content Check</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Google Analytics Setup</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Google Search Console Setup</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Backlink Analysis</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center mb-40">
+                <span class="accent-header">Step 2</span>
+                <h2>🧩 On-Page Optimization</h2>
+            </div>
+            <div class="feature-block">
+                <div class="table-responsive">
+                    <table class="comp-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th class="col-basic">Basic</th>
+                                <th class="col-silver">Silver</th>
+                                <th class="col-gold">Gold</th>
+                                <th class="col-prem">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Website Structure Analysis</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Meta Title Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Meta Description Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Header Tag Optimization (H1–H6)</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>URL Structure Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Image Alt Tag Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Content Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Internal Linking Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Page Speed Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Core Web Vitals Optimization</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Schema Markup Implementation</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Canonical Tag Setup</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Robots.txt Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>XML Sitemap Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Broken Link Fixing</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Mobile Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Crawl Error Fixes</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>UX & Engagement Optimization</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center mb-40">
+                <span class="accent-header">Step 3</span>
+                <h2>🔗 Off-Page Optimization</h2>
+            </div>
+            <div class="feature-block">
+                <div class="table-responsive">
+                    <table class="comp-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th class="col-basic">Basic</th>
+                                <th class="col-silver">Silver</th>
+                                <th class="col-gold">Gold</th>
+                                <th class="col-prem">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Search Engine Submission</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Blog Writing</td><td>2</td><td>2</td><td>3</td><td>5</td></tr>
+                            <tr><td>Blog Links</td><td>2</td><td>2</td><td>3</td><td>5</td></tr>
+                            <tr><td>Blog Bookmarking Links</td><td>6</td><td>10</td><td>16</td><td>35</td></tr>
+                            <tr><td>Article Writing</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+                            <tr><td>Article Submissions</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+                            <tr><td>Article Marketing</td><td>5</td><td>10</td><td>15</td><td>25</td></tr>
+                            <tr><td>Image Sharing</td><td>2</td><td>4</td><td>8</td><td>12</td></tr>
+                            <tr><td>Contextual Links</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Web 2.0 Profile Creation</td><td class="cross">✖</td><td>1</td><td>2</td><td>5</td></tr>
+                            <tr><td>Press Release (If News Provided)</td><td class="cross">✖</td><td class="cross">✖</td><td class="cross">✖</td><td class="check">✔</td></tr>
+                            <tr><td>Social Bookmarking Links</td><td>15</td><td>24</td><td>30</td><td>60</td></tr>
+                            <tr><td>Micro Blogging</td><td>4</td><td>7</td><td>12</td><td>20</td></tr>
+                            <tr><td>Classified Submissions</td><td>5</td><td>8</td><td>12</td><td>25</td></tr>
+                            <tr><td>Infographics Creation</td><td class="cross">✖</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Google Business Page Creation</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Bing Local Listing</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Local Business Listings</td><td>12</td><td>24</td><td>40</td><td>100</td></tr>
+                            <tr><td>NAP Syndication</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center mb-40">
+                <span class="accent-header">Step 4</span>
+                <h2>📱 Social Media Optimization (SMO)</h2>
+            </div>
+            <div class="feature-block">
+                <div class="table-responsive">
+                    <table class="comp-table">
+                        <thead>
+                            <tr>
+                                <th>Platform Activity</th>
+                                <th class="col-basic">Basic</th>
+                                <th class="col-silver">Silver</th>
+                                <th class="col-gold">Gold</th>
+                                <th class="col-prem">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Facebook Profile & Engagement</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Facebook Post Creation</td><td>4</td><td>8</td><td>12</td><td>20</td></tr>
+                            <tr><td>Instagram Optimization</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Instagram Post Creation</td><td>4</td><td>8</td><td>12</td><td>20</td></tr>
+                            <tr><td>Twitter (X) Setup & Posting</td><td>4</td><td>8</td><td>12</td><td>20</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center mb-40">
+                <span class="accent-header">Step 5</span>
+                <h2>📊 Reporting & Support</h2>
+            </div>
+            <div class="feature-block">
+                <div class="table-responsive">
+                    <table class="comp-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th class="col-basic">Basic</th>
+                                <th class="col-silver">Silver</th>
+                                <th class="col-gold">Gold</th>
+                                <th class="col-prem">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Monthly SEO & Ranking Report</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Traffic & Performance Report</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Competitor Tracking Report</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Email / Chat Support</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Dedicated SEO Manager</td><td class="cross">✖</td><td class="cross">✖</td><td class="check">✔</td><td class="check">✔</td></tr>
+                            <tr><td>Priority Support</td><td class="cross">✖</td><td class="cross">✖</td><td class="cross">✖</td><td class="check">✔</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>TopSEO Minds</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Web Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">30 N. Gould St, Ste 6573<br>Sheridan, WY 82801</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>

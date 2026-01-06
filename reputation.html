@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reputation Management | TopSEO Minds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- COPY THEME VARIABLES FROM INDEX.HTML --- */
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-darker: #020c1b;
+            --accent: #64ffda;
+            --text-bright: #e6f1ff;
+            --text-muted: #8892b0;
+            --whatsapp-green: #25D366;
+            --transition: all 0.3s ease;
+            --section-spacing: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-bright);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; border-radius: 8px; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: var(--section-spacing) 0; }
+        
+        h1, h2, h3, h4 { font-weight: 700; color: var(--text-bright); line-height: 1.2; }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; margin-top: 40px; }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; }
+
+        .accent-header {
+            color: var(--accent);
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-fill {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+        .btn-fill:hover { background: #4cccba; transform: translateY(-3px); }
+        
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > li { position: relative; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-bright); text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            min-width: 220px;
+            padding: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-links > li:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-transform: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .dropdown-menu li a:hover { background: rgba(255,255,255,0.05); padding-left: 25px; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 180px 0 100px;
+            background: linear-gradient(rgba(10, 25, 47, 0.95), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80') center/cover;
+            text-align: center;
+        }
+        .breadcrumb { margin-top: 20px; font-size: 0.9rem; color: var(--text-muted); }
+        .breadcrumb span { color: var(--accent); }
+
+        /* --- CONTENT GRID --- */
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+        
+        .orm-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .orm-card {
+            background: var(--bg-secondary);
+            padding: 30px 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            text-align: left;
+        }
+        .orm-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .orm-card h4 { font-size: 1.2rem; color: #fff; margin-bottom: 15px; margin-top: 15px; }
+        .orm-card p { font-size: 0.95rem; margin-bottom: 0; color: var(--text-muted); }
+        .orm-card i { font-size: 2.2rem; color: var(--accent); }
+
+        .aligned-list { list-style: none; padding: 0; margin: 20px 0; }
+        .aligned-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+        .aligned-list i {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        /* Sidebar Form */
+        .sidebar-form-container {
+            position: sticky; top: 100px;
+            background: #fff; border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .form-header {
+            background: #5c6b7f; padding: 30px 20px 60px 20px;
+            text-align: center; position: relative; z-index: 1;
+        }
+        .form-header h3 { color: #fff; font-size: 1.4rem; text-transform: uppercase; margin: 0; font-weight: 300; }
+        .form-header h3 strong { font-weight: 700; }
+        .form-header::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; background: #fff;
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        }
+        .form-body { padding: 20px 30px 40px 30px; background: #fff; }
+        .sidebar-input {
+            width: 100%; padding: 12px 15px; margin-bottom: 15px;
+            border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; color: #333; background: #fff;
+        }
+        .sidebar-btn {
+            width: 100%; padding: 15px; background: #429aff; color: #fff;
+            border: none; border-radius: 4px; font-weight: 700;
+            text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        .sidebar-btn:hover { background: #2176d2; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--bg-darker); padding: 80px 0 30px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1.1rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; }
+        .footer-links a { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+
+        @media (max-width: 900px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .sidebar-form-container { position: relative; top: 0; margin-top: 50px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">TopSEO <span>Minds</span>.</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#" style="color:var(--accent)">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html" style="color:var(--accent)">Reputation Management</a></li>
+                        <li><a href="advertising.html">Advertising (PPC)</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="market.html">Market</a></li>
+                <li>
+                    <a href="#">Pricing <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo-packages.html">SEO Packages</a></li>
+                        <li><a href="smo-packages.html">SMO Packages</a></li>
+                        <li><a href="ppc-packages.html">PPC Packages</a></li>
+                        <li><a href="orm-packages.html">ORM Packages</a></li>
+                        <li><a href="website-packages.html">Website Packages</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pay-now.html" class="btn-fill">PAY NOW</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <a href="https://wa.me/" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <header class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-up">Reputation Management</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Defend Your Brand. Remove Negativity. Build Trust.</p>
+            <div class="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html">Home</a> / <span>Reputation (ORM)</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container content-grid">
+            
+            <div class="service-detail">
+                <span class="accent-header">Protect Your Image</span>
+                <h2>Remove Bad Reviews & Negative Links</h2>
+                <p>Without a doubt, your online image plays a noteworthy part in the success of your business. At <strong>TopSEO Minds</strong>, we defend your image in the industry.</p>
+                
+                <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&q=80&w=1200" alt="Online Reputation Management" style="margin: 30px 0; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+
+                <div class="orm-services">
+                    <div class="orm-card">
+                        <i class="fas fa-trash-alt"></i>
+                        <h4>Remove Complaints</h4>
+                        <p>We identify and legally challenge false complaints on consumer forums.</p>
+                    </div>
+                    <div class="orm-card">
+                        <i class="fas fa-star-half-alt"></i>
+                        <h4>Remove Bad Reviews</h4>
+                        <p>Eliminate negative Google reviews that violate policies.</p>
+                    </div>
+                    <div class="orm-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Online Protection</h4>
+                        <p>We build a fortress of positive content around your brand.</p>
+                    </div>
+                </div>
+
+                <h3>Our ORM Methodology</h3>
+                <ul class="aligned-list">
+                    <li><i class="fas fa-check-circle"></i><div><strong>Link Building:</strong> Promoting positive assets above negative ones.</div></li>
+                    <li><i class="fas fa-check-circle"></i><div><strong>Social Authority:</strong> Developing profiles to dominate search rankings.</div></li>
+                    <li><i class="fas fa-check-circle"></i><div><strong>Content Suppression:</strong> Pushing negative results to the 2nd or 3rd page.</div></li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="sidebar-form-container" id="audit">
+                    <div class="form-header">
+                        <h3>START NOW <strong>PAY NOW</strong></h3>
+                    </div>
+                    <div class="form-body">
+                        <form action="pay-now.html">
+                            <input type="text" class="sidebar-input" placeholder="Name (*)" required>
+                            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                                <select style="width:80px; padding:10px; border:1px solid #ddd; border-radius:4px;">
+                                    <option>🇺🇸 +1</option>
+                                    <option>🇮🇳 +91</option>
+                                </select>
+                                <input type="tel" class="sidebar-input" placeholder="Phone (*)" style="margin-bottom:0;" required>
+                            </div>
+                            <input type="email" class="sidebar-input" placeholder="Email Address (*)" required>
+                            <input type="url" class="sidebar-input" placeholder="Link to Negative Review">
+                            <textarea class="sidebar-input" rows="3" placeholder="Describe the issue..."></textarea>
+                            <button class="sidebar-btn" type="submit">PAY NOW</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>TopSEO Minds</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone-alt"></i> <span>+1-307-209-3608</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>info@topseominds.com</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+</body>
+</html>
