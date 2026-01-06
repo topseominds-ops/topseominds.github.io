@@ -107,8 +107,42 @@
         .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
         .logo span { color: var(--accent); }
         .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > li { position: relative; }
         .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-bright); text-transform: uppercase; }
         .nav-links a:hover { color: var(--accent); }
+
+        /* Dropdown Menu styling */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            min-width: 220px;
+            padding: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-links > li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            text-transform: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+        .dropdown-menu li a:hover {
+            background: rgba(255,255,255,0.05);
+            padding-left: 25px;
+        }
 
         /* --- STABLE HERO SLIDER (FIXED ALIGNMENT) --- */
         #hero-slider {
@@ -152,70 +186,27 @@
             height: 100%;
         }
 
-        /* Left Side Text */
-        .hero-text {
-            padding-right: 20px;
-        }
-        .hero-title {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            color: #fff;
-        }
+        .hero-text { padding-right: 20px; }
+        .hero-title { font-size: 4rem; line-height: 1.1; margin-bottom: 25px; color: #fff; }
         .hero-title span { color: var(--accent); }
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 550px;
-        }
-        .hero-btns {
-            display: flex;
-            gap: 15px;
-        }
+        .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; max-width: 550px; }
+        .hero-btns { display: flex; gap: 15px; }
 
-        /* Right Side Image Container */
         .hero-img {
             position: relative;
             width: 100%;
-            height: 500px; /* Fixed height for consistent alignment */
+            height: 500px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             border: 1px solid rgba(100, 255, 218, 0.1);
         }
 
-        .hero-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Enhance sharpness */
-            image-rendering: -webkit-optimize-contrast; 
-        }
+        .hero-img img { width: 100%; height: 100%; object-fit: cover; image-rendering: -webkit-optimize-contrast; }
+        .hero-img::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, rgba(10, 25, 47, 0.4), transparent 50%); }
 
-        /* Gradient Overlay on Image for better integration */
-        .hero-img::after {
-            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: linear-gradient(to right, rgba(10, 25, 47, 0.4), transparent 50%);
-        }
-
-        /* Dots Navigation */
-        .dots {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            display: flex;
-            gap: 10px;
-        }
-        .dot {
-            width: 12px; height: 12px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+        .dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 10px; }
+        .dot { width: 12px; height: 12px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.3s; }
         .dot.active { background: var(--accent); }
 
         /* --- MARQUEE --- */
@@ -227,7 +218,7 @@
         /* --- GENERAL GRID LAYOUTS --- */
         .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .img-wrapper { position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .img-wrapper::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; border: 2px solid var(--accent); top: 15px; left: 15px; z-index: -1; border-radius: 10px; }
+        .img-wrapper::after { content:''; position:absolute; top:15px; left:15px; width:100%; height:100%; border: 2px solid var(--accent); z-index: -1; border-radius: 10px; }
 
         /* --- SERVICES --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
@@ -244,12 +235,6 @@
         .plan-crossed { text-decoration: line-through; color: var(--text-muted); font-size: 1rem; }
         .plan-features { text-align: left; margin: 25px 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .plan-features li { margin-bottom: 12px; display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); }
-        
-        /* Status Colors */
-        .text-green { color: var(--price-basic); }
-        .text-silver { color: var(--price-silver); }
-        .text-gold { color: var(--price-gold); }
-        .text-blue { color: var(--price-premium); }
         .check { color: var(--whatsapp-green); font-weight: bold; }
         .cross { color: #ef4444; font-weight: bold; }
 
@@ -268,18 +253,12 @@
         #audit { background: linear-gradient(rgba(10,25,47,0.9), rgba(10,25,47,0.9)), url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80') center/cover fixed; }
         .audit-form input { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 4px; margin-bottom: 15px; }
 
-        /* RESPONSIVE */
-        @media (max-width: 1024px) { 
-            .nav-links { gap: 15px; font-size: 0.75rem; } 
-            .hero-title { font-size: 3rem; }
-        }
         @media (max-width: 900px) {
             .hero-grid, .split-grid, .footer-grid, .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
             .hero-img { height: 300px; order: -1; }
             .hero-text { text-align: center; padding-right: 0; }
             .hero-btns { justify-content: center; }
             .nav-links { display: none; }
-            .img-wrapper::after { display: none; }
         }
     </style>
 </head>
@@ -287,21 +266,41 @@
 
     <nav>
         <div class="container nav-container">
-            <div class="logo">TopSEO <span>Minds</span></div>
-            <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#market">Market</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#about">About</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-                <a href="#audit" class="btn-fill" style="padding: 8px 20px; font-size: 0.8rem;">Free Audit</a>
-            </div>
+            <a href="index.html" class="logo">TopSEO <span>Minds</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="#">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo.html">SEO Services</a></li>
+                        <li><a href="web-design.html">Website Services</a></li>
+                        <li><a href="social-media.html">Social Media</a></li>
+                        <li><a href="reputation.html">Reputation Management</a></li>
+                        <li><a href="advertising.html">Advertising (PPC)</a></li>
+                        <li><a href="mobile-apps.html">Mobile Apps</a></li>
+                    </ul>
+                </li>
+                <li><a href="market.html">Market</a></li>
+                <li>
+                    <a href="#">Pricing <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="seo-packages.html">SEO Packages</a></li>
+                        <li><a href="smo-packages.html">SMO Packages</a></li>
+                        <li><a href="ppc-packages.html">PPC Packages</a></li>
+                        <li><a href="orm-packages.html">ORM Packages</a></li>
+                        <li><a href="website-packages.html">Website Packages</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pay-now.html" class="btn-fill" style="padding: 8px 20px; font-size: 0.8rem;">PAY NOW</a></li>
+            </ul>
         </div>
     </nav>
 
-    <a href="https://wa.me/" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/YOURNUMBER" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <section id="hero-slider">
         <div class="slide active">
@@ -311,7 +310,7 @@
                     <h1 class="hero-title">Dominate Search <br> <span>Rankings</span></h1>
                     <p class="hero-desc">Data-driven SEO strategies that put your brand on page one. We don't just build traffic; we engineer authority and long-term growth.</p>
                     <div class="hero-btns">
-                        <a href="#audit" class="btn-fill">Get Free Proposal</a>
+                        <a href="pay-now.html" class="btn-fill">PAY NOW</a>
                         <a href="#services" class="btn-outline">Explore Services</a>
                     </div>
                 </div>
@@ -328,8 +327,8 @@
                     <h1 class="hero-title">Data-Driven <br> <span>Revenue Growth</span></h1>
                     <p class="hero-desc">Stop guessing. We utilize advanced, proprietary analytics to uncover high-value opportunities your competitors are missing.</p>
                     <div class="hero-btns">
-                        <a href="#audit" class="btn-fill">Start Scaling</a>
-                        <a href="#about" class="btn-outline">Our Process</a>
+                        <a href="pay-now.html" class="btn-fill">PAY NOW</a>
+                        <a href="about.html" class="btn-outline">Our Process</a>
                     </div>
                 </div>
                 <div class="hero-img">
@@ -345,7 +344,7 @@
                     <h1 class="hero-title">Scale Your Brand <br> <span>Globally</span></h1>
                     <p class="hero-desc">From local dominance to global recognition. Our team of experts provides the infrastructure to scale your brand across borders.</p>
                     <div class="hero-btns">
-                        <a href="#contact" class="btn-fill">Contact Us</a>
+                        <a href="contact.html" class="btn-fill">Contact Us</a>
                         <a href="#pricing" class="btn-outline">View Plans</a>
                     </div>
                 </div>
@@ -382,7 +381,7 @@
                 <span class="accent-header">Our Methodology</span>
                 <h2 class="section-title">Where Data Meets Design.</h2>
                 <p class="mb-40">We don't guess. We analyze 200+ ranking signals to engineer success. Our approach blends technical SEO perfection with user-centric design.</p>
-                <a href="#audit" class="btn-outline">See Our Process</a>
+                <a href="about.html" class="btn-outline">See Our Process</a>
             </div>
             <div class="img-wrapper" data-aos="fade-left">
                 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=100&w=800" alt="Analysis">
@@ -440,7 +439,7 @@
                 <span class="accent-header">Scaling Businesses</span>
                 <h2 class="section-title">We Don't Just Promise Traffic.</h2>
                 <p class="mb-40">Many agencies focus on vanity metrics. We focus on your bottom line. Every strategy is tied directly to lead generation and sales growth.</p>
-                <a href="#audit" class="btn-fill">Start Scaling Today</a>
+                <a href="pay-now.html" class="btn-fill">PAY NOW</a>
             </div>
         </div>
     </section>
@@ -462,7 +461,7 @@
                         <li><span>GBP</span> <span class="cross">✘</span></li>
                         <li><span>Geotagging</span> <span class="cross">✘</span></li>
                     </ul>
-                    <a href="#audit" class="btn-outline" style="width:100%">Start Today</a>
+                    <a href="pay-now.html" class="btn-outline" style="width:100%">PAY NOW</a>
                 </div>
                 <div class="price-card">
                     <h4 class="plan-title">SILVER</h4>
@@ -474,7 +473,7 @@
                         <li><span>GBP</span> <span class="check">✔</span></li>
                         <li><span>Geotagging</span> <span class="cross">✘</span></li>
                     </ul>
-                    <a href="#audit" class="btn-outline" style="width:100%">Start Today</a>
+                    <a href="pay-now.html" class="btn-outline" style="width:100%">PAY NOW</a>
                 </div>
                 <div class="price-card featured">
                     <div style="position:absolute; top:-10px; right:-10px; background:red; color:#fff; padding:5px 10px; border-radius:50px; font-size:0.7rem; font-weight:bold;">BEST SELLER</div>
@@ -487,7 +486,7 @@
                         <li><span>GBP</span> <span class="check">✔</span></li>
                         <li><span>Geotagging</span> <span class="check">✔</span></li>
                     </ul>
-                    <a href="#audit" class="btn-fill" style="width:100%; border:none; background:var(--price-gold)">Start Today</a>
+                    <a href="pay-now.html" class="btn-fill" style="width:100%; border:none; background:var(--price-gold)">PAY NOW</a>
                 </div>
                 <div class="price-card">
                     <h4 class="plan-title">PREMIUM</h4>
@@ -499,22 +498,17 @@
                         <li><span>GBP</span> <span class="check">✔</span></li>
                         <li><span>Geotagging</span> <span class="check">✔</span></li>
                     </ul>
-                    <a href="#audit" class="btn-outline" style="width:100%">Start Today</a>
+                    <a href="pay-now.html" class="btn-outline" style="width:100%">PAY NOW</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="audit" class="section-padding">
+    <section id="pay-now-section" class="section-padding">
         <div class="container text-center">
-            <h2 class="section-title">Get Your Free 30-Page Audit</h2>
-            <p class="mb-40">Stop guessing. Get a data-driven roadmap to revenue.</p>
-            <form style="max-width:600px; margin:0 auto; background:rgba(17,34,64,0.9); padding:40px; border-radius:10px;" class="audit-form">
-                <input type="text" placeholder="Name *" required>
-                <input type="email" placeholder="Email *" required>
-                <input type="url" placeholder="Website URL *" required>
-                <button class="btn-fill" style="width:100%; border:none; margin-top:10px;">Send Me The Report</button>
-            </form>
+            <h2 class="section-title">Ready to Begin?</h2>
+            <p class="mb-40">Choose your plan and complete your payment to get started immediately.</p>
+            <a href="pay-now.html" class="btn-fill" style="padding: 20px 60px; font-size: 1.2rem;">PROCEED TO PAY NOW</a>
         </div>
     </section>
 
@@ -522,12 +516,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="#" class="logo">TopSEO <span>Minds</span></a>
+                    <a href="index.html" class="logo">TopSEO <span>Minds</span></a>
                     <p style="margin-top:20px; color:#8892b0; line-height:1.6;">A leading digital marketing agency specialized in SEO, PPC, and Web Design strategies that drive revenue.</p>
-                    <div style="margin-top:20px;" class="trust-badges">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Semrush_logo.svg" alt="Semrush">
-                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Services</h4>
@@ -543,10 +533,10 @@
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Case Studies</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -568,7 +558,6 @@
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // SLIDER LOGIC
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
         let current = 0;
